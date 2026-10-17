@@ -37,17 +37,23 @@ Note, that snapshots are not updated automatically.
 Tasks
 =====
 * `dependencyUpdates`: show a list of project dependencies that can be updated,
-* `dependencyUpdatesReport`: writes a list of project dependencies to a file.
+* `dependencyUpdatesReport`: writes a list of project dependencies to a file,
+* `dependencyUpdatesCsvReport`: writes the list as CSV, one dependency per line with the columns
+  `module;current;patch;minor;major`. A column is empty when there is no such update.
+
+When a repository cannot be asked, for example because credentials are missing or it is unreachable, sbt-updates warns
+that the list may be incomplete. `last dependencyUpdatesData` shows each failed request.
 
 Settings
 ========
 * `dependencyUpdatesReportFile`: report file location, `target/dependency-updates.txt` by default.
+* `dependencyUpdatesCsvReportFile`: CSV report file location, `target/dependency-updates.csv` by default.
 * `dependencyUpdatesFilter`: filter matching dependencies that should be included to update reporting.
 * `dependencyUpdatesFailBuild`: `dependencyUpdates` task will fail a build if updates found.
 * `dependencyAllowPreRelease`: when enabled, pre-release dependencies will be reported as well.
 
-#### Deprecated Settings
-* `dependencyUpdatesExclusions`: filter matching dependencies that should be excluded from update reporting.
+`dependencyUpdatesExclusions`, deprecated since version 0.4.0, has been removed. Exclude modules with
+`dependencyUpdatesFilter` instead, as shown below.
 
 Exclusions
 ==========
